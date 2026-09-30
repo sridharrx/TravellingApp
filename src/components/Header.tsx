@@ -1,11 +1,20 @@
+import { Link } from "react-router-dom";
+
 function Header() {
   return (
-    <header className="header">
-      <h2>Travel To Maldives</h2>
+    <header>
+      <div>
+        <Link to="/">Travel To Maldives</Link>
+      </div>
 
-      <div className="header-buttons">
-        <button>Login</button>
-        <button>Sign Up</button>
+      <div>
+        <Link to="/login">
+          <button>Login</button>
+        </Link>
+
+        <Link to="/signup">
+          <button>Sign Up</button>
+        </Link>
       </div>
     </header>
   );
