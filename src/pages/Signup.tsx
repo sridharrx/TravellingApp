@@ -10,6 +10,7 @@ function Signup() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    localStorage.removeItem("isLoggedIn");
     localStorage.setItem("userName", name);
     localStorage.setItem("userEmail", email);
 

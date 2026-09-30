@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function TravelForm() {
 
@@ -9,6 +10,7 @@ function TravelForm() {
   const [email, setEmail] = useState(() => localStorage.getItem("userEmail") || "");
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
   useEffect(() => {
     setFullName(localStorage.getItem("userName") || "");
@@ -81,7 +83,8 @@ function TravelForm() {
   return (
     <form className="travel-form" onSubmit={handleSubmit}>
 
-      <h1>Fly to Maldives</h1>
+      <h1>Travel the World</h1>
+      <p>isLoggedIn: {String(isLoggedIn)}</p>
 
       {/* Dates */}
       <div className="form-row">
@@ -172,9 +175,15 @@ function TravelForm() {
 
       </div>
 
-      <button type="submit">
-        Submit
-      </button>
+      {isLoggedIn ? (
+        <button type="submit">
+          Submit
+        </button>
+      ) : (
+        <Link to="/login">
+          <button type="button">Login to Submit</button>
+        </Link>
+      )}
 
     </form>
   );

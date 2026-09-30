@@ -54,6 +54,7 @@ function Login() {
 
                 localStorage.setItem("userName", savedUserName);
                 localStorage.setItem("userEmail", savedUserEmail);
+                localStorage.setItem("isLoggedIn", "true");
 
                 // Go to Home page
                 navigate("/");

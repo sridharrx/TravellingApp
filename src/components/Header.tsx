@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <header>
+    <header className="header">
       <div>
-        <Link to="/">Travel To Maldives</Link>
+        <Link to="/">Travel the World</Link>
       </div>
 
-      <div>
+      <div className="header-buttons">
         <Link to="/login">
           <button>Login</button>
         </Link>
