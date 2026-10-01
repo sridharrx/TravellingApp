@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
 
     const navigate = useNavigate();
+    const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "https://travellingappbackend.onrender.com").replace(/\/+$/, "");
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,7 +19,7 @@ function Login() {
         try {
 
             const response = await fetch(
-                "http://localhost:8080/api/auth/login",
+                `${API_BASE_URL}/api/auth/login`,
                 {
                     method: "POST",
                     headers: {

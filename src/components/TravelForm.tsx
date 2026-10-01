@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 function TravelForm() {
 
+  const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "https://travellingappbackend.onrender.com").replace(/\/+$/, "");
+
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [destination, setDestination] = useState("");
@@ -45,7 +47,7 @@ function TravelForm() {
     try {
 
         const response = await fetch(
-            `http://localhost:8080/api/travel?email=${encodeURIComponent(userEmail)}`,
+            `${API_BASE_URL}/api/travel?email=${encodeURIComponent(userEmail)}`,
             {
                 method: "POST",
                 headers: {

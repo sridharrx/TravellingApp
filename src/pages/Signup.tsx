@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
+  const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "https://travellingappbackend.onrender.com").replace(/\/+$/, "");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +16,7 @@ function Signup() {
     localStorage.setItem("userEmail", email);
 
     try {
-      await fetch("http://localhost:8080/api/auth/signup", {
+      await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
