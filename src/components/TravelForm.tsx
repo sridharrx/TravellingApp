@@ -86,7 +86,7 @@ function TravelForm() {
     <form className="travel-form" onSubmit={handleSubmit}>
 
       <h1>Travel the World</h1>
-      <p>isLoggedIn: {String(isLoggedIn)}</p>
+      <p>Online: {String(isLoggedIn)}</p>
 
       {/* Dates */}
       <div className="form-row">
@@ -121,7 +121,7 @@ function TravelForm() {
             type="text"
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
-            placeholder="Maldives"
+            placeholder="e.g. Maldives, Goa"
             required
           />
         </div>
