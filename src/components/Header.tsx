@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Header() {
   const navigate = useNavigate();
+  const location = useLocation();
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => localStorage.getItem("isLoggedIn") === "true"
@@ -59,7 +60,11 @@ function Header() {
       </div>
 
       <div className="header-buttons">
-        {isLoggedIn ? (
+        {location.pathname === "/agent" ? (
+          <Link to="/">
+            <button>Home</button>
+          </Link>
+        ) : isLoggedIn ? (
           <div className="user-menu" ref={menuRef}>
             <div className="user-menu-trigger">
               <span className="username">{username}</span>

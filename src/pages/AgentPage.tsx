@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Header from "../components/Header";
 import AgentEnquiryCard from "../components/AgentEnquiryCard";
 import { API_BASE_URL } from "../config/api";
 
@@ -64,22 +65,29 @@ function AgentPage() {
   }, []);
 
   if (loading) {
-    return <h2>Loading enquiries...</h2>;
+    return (
+      <>
+        <Header />
+        <h2 style={{ textAlign: "center" }}>Loading enquiries...</h2>
+      </>
+    );
   }
 
   return (
-    <div style={{ maxWidth: "900px", margin: "0 auto", padding: "24px 16px" }}>
+    <>
+      <Header />
 
-      <h1 style={{ textAlign: "center", marginBottom: "24px" }}>Agent Dashboard</h1>
+      <div style={{ maxWidth: "900px", margin: "0 auto", padding: "24px 16px" }}>
+        <h1 style={{ textAlign: "center", marginBottom: "24px" }}>Agent Dashboard</h1>
 
-      {enquiries.map((enquiry, index) => (
-        <AgentEnquiryCard
-          key={index}
-          enquiry={enquiry}
-        />
-      ))}
-
-    </div>
+        {enquiries.map((enquiry, index) => (
+          <AgentEnquiryCard
+            key={index}
+            enquiry={enquiry}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 

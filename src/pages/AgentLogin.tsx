@@ -20,13 +20,13 @@ function AgentLogin() {
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: "420px", margin: "40px auto", padding: "0 16px" }}>
 
-      <h1>Agent Login</h1>
+      <h1 style={{ textAlign: "center", marginBottom: "24px" }}>Agent Login</h1>
 
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
 
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <label>Username</label>
 
           <input
@@ -37,7 +37,7 @@ function AgentLogin() {
           />
         </div>
 
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <label>Password</label>
 
           <input
@@ -48,7 +48,7 @@ function AgentLogin() {
           />
         </div>
 
-        <button type="submit">
+        <button type="submit" style={{ marginTop: "8px" }}>
           Agent Login
         </button>
 

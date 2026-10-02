@@ -1,11 +1,18 @@
 body {
   margin: 0;
-  background: #eef4ff;
+  min-height: 100vh;
   font-family: Arial, sans-serif;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.42), rgba(15, 23, 42, 0.42)),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #0f172a;
 }
 
 main {
-  background: #eef4ff;
+  background: transparent;
 }
 
 .header {

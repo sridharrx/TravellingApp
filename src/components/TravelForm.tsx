@@ -102,7 +102,6 @@ function TravelForm() {
     <form className="travel-form" onSubmit={handleSubmit}>
 
       <h1>Travel the World</h1>
-      <p>Online: {String(isLoggedIn)}</p>
 
       {/* Dates */}
       <div className="form-row">
