@@ -96,6 +96,10 @@ function Header() {
           </div>
         ) : (
           <>
+            <Link to="/agent-login">
+              <button>Agent Login</button>
+            </Link>
+
             <Link to="/login">
               <button>Login</button>
             </Link>

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config/api";
 
 function Login() {
 
     const navigate = useNavigate();
-    const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "https://travellingappbackend.onrender.com").replace(/\/+$/, "");
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
