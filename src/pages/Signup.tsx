@@ -44,6 +44,8 @@ const handleSignup = async (e: React.FormEvent) => {
     setEmail("");
     setPassword("");
 
+    navigate("/login");
+
   } catch (error) {
     console.error("Signup error:", error);
     alert("Unable to connect to server");
