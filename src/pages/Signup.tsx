@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
@@ -98,6 +98,10 @@ const handleSignup = async (e: React.FormEvent) => {
 
         <button type="submit">Sign Up</button>
       </form>
+
+      <div className="auth-topbar">
+        <Link to="/" className="home-link">Home</Link>
+      </div>
     </div>
   );
 }

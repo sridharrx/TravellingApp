@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -42,16 +42,18 @@ function Login() {
                     userData = null;
                 }
 
-                const savedUserName =
-                    userData?.user?.name ??
-                    userData?.name ??
-                    localStorage.getItem("userName") ??
-                    "";
-
                 const savedUserEmail =
                     userData?.user?.email ??
                     userData?.email ??
                     email;
+
+                const fallbackUserName =
+                    savedUserEmail?.split("@")[0]?.trim() || "User";
+
+                const savedUserName =
+                    userData?.user?.name ??
+                    userData?.name ??
+                    fallbackUserName;
 
                 localStorage.setItem("userName", savedUserName);
                 localStorage.setItem("userEmail", savedUserEmail);
@@ -121,6 +123,10 @@ function Login() {
             {message && (
                 <p>{message}</p>
             )}
+
+            <div className="auth-topbar">
+                <Link to="/" className="home-link">Home</Link>
+            </div>
 
         </div>
     );

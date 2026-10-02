@@ -23,6 +23,23 @@ function TravelForm() {
 
     e.preventDefault();
 
+    const trimmedDestination = destination.trim();
+
+    if (!trimmedDestination) {
+      alert("Please enter a destination");
+      return;
+    }
+
+    if (!fromDate) {
+      alert("Please select a from date");
+      return;
+    }
+
+    if (!toDate) {
+      alert("Please select a to date");
+      return;
+    }
+
     // Get logged-in user's email
     const userEmail = localStorage.getItem("userEmail");
 
@@ -36,7 +53,7 @@ function TravelForm() {
         fullName,
         fromDate,
         toDate,
-        destination,
+        destination: trimmedDestination,
         adults,
         children
     };
@@ -86,7 +103,7 @@ function TravelForm() {
     <form className="travel-form" onSubmit={handleSubmit}>
 
       <h1>Travel the World</h1>
-      <p>isLoggedIn: {String(isLoggedIn)}</p>
+      <p>Online: {String(isLoggedIn)}</p>
 
       {/* Dates */}
       <div className="form-row">
@@ -121,7 +138,7 @@ function TravelForm() {
             type="text"
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
-            placeholder="Maldives"
+            placeholder="e.g. Maldives, Goa"
             required
           />
         </div>
