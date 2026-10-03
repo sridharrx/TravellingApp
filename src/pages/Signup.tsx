@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 import { API_BASE_URL } from "../config/api";
 
 function Signup() {
@@ -7,53 +8,55 @@ function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-const handleSignup = async (e: React.FormEvent) => {
-  e.preventDefault();
+    if (isLoading) return;
 
-  const signupData = {
-    name,
-    email,
-    password
-  };
+    setIsLoading(true);
 
-  try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/auth/signup`,
-      {
+    const signupData = {
+      name,
+      email,
+      password,
+    };
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(signupData)
+        body: JSON.stringify(signupData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || "Signup failed");
+        return;
       }
-    );
 
-    const data = await response.json();
+      alert("Signup successful!");
 
-    if (!response.ok) {
-      alert(data.message || "Signup failed");
-      return;
+      setName("");
+      setEmail("");
+      setPassword("");
+      navigate("/login");
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Unable to connect to server");
+    } finally {
+      setIsLoading(false);
     }
-
-    alert("Signup successful!");
-
-    // Clear form
-    setName("");
-    setEmail("");
-    setPassword("");
-
-    navigate("/login");
-
-  } catch (error) {
-    console.error("Signup error:", error);
-    alert("Unable to connect to server");
-  }
-};
+  };
 
   return (
     <div>
+      {isLoading && <Loader text="Creating account..." />}
+
       <h2>Sign Up</h2>
 
       <form onSubmit={handleSignup}>
@@ -65,6 +68,7 @@ const handleSignup = async (e: React.FormEvent) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            disabled={isLoading}
           />
         </div>
 
@@ -78,6 +82,7 @@ const handleSignup = async (e: React.FormEvent) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={isLoading}
           />
         </div>
 
@@ -91,12 +96,15 @@ const handleSignup = async (e: React.FormEvent) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={isLoading}
           />
         </div>
 
         <br />
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Creating account..." : "Sign Up"}
+        </button>
       </form>
 
       <div className="auth-topbar">

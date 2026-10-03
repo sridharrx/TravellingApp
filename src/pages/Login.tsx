@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 import { API_BASE_URL } from "../config/api";
 
 function Login() {
@@ -9,12 +10,16 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleLogin = async (e: React.FormEvent) => {
 
         e.preventDefault();
 
+        if (isLoading) return;
+
         setMessage("");
+        setIsLoading(true);
 
         try {
 
@@ -59,7 +64,7 @@ function Login() {
                 localStorage.setItem("userEmail", savedUserEmail);
                 localStorage.setItem("isLoggedIn", "true");
 
-                // Go to Home page
+                setIsLoading(false);
                 navigate("/");
 
                 return;
@@ -74,11 +79,14 @@ function Login() {
             console.error("Login error:", error);
 
             setMessage("Unable to connect to server");
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <div>
+            {isLoading && <Loader text="Logging in..." />}
 
             <h2>Login</h2>
 
@@ -94,6 +102,7 @@ function Login() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
+                        disabled={isLoading}
                     />
                 </div>
 
@@ -109,13 +118,14 @@ function Login() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        disabled={isLoading}
                     />
                 </div>
 
                 <br />
 
-                <button type="submit">
-                    Login
+                <button type="submit" disabled={isLoading}>
+                    {isLoading ? "Logging in..." : "Login"}
                 </button>
 
             </form>

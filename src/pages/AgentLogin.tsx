@@ -1,26 +1,37 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 
 function AgentLogin() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (username === "agent" && password === "agent4321") {
+    if (isLoading) return;
+
+    setIsLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 900));
+
+    if (username === "agent" && password === "agent12345") {
+      setIsLoading(false);
       navigate("/agent");
       return;
     }
 
+    setIsLoading(false);
     alert("Invalid agent username or password");
   };
 
   return (
     <div style={{ maxWidth: "420px", margin: "40px auto", padding: "0 16px" }}>
+      {isLoading && <Loader text="Checking credentials..." />}
 
       <h1 style={{ textAlign: "center", marginBottom: "24px" }}>Agent Login</h1>
 
@@ -34,6 +45,7 @@ function AgentLogin() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username"
+            disabled={isLoading}
           />
         </div>
 
@@ -45,11 +57,12 @@ function AgentLogin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
+            disabled={isLoading}
           />
         </div>
 
-        <button type="submit" style={{ marginTop: "8px" }}>
-          Agent Login
+        <button type="submit" style={{ marginTop: "8px" }} disabled={isLoading}>
+          {isLoading ? "Checking..." : "Agent Login"}
         </button>
 
       </form>
