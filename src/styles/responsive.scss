@@ -1,0 +1,123 @@
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+    background-position: center top;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px 16px;
+  }
+
+  .header > div:first-child a {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  .header-buttons {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .header-buttons a,
+  .header-buttons button {
+    width: 100%;
+  }
+
+  .header-buttons a {
+    max-width: none;
+  }
+
+  form {
+    width: calc(100% - 24px);
+    margin-top: 24px;
+    padding: 22px 16px;
+  }
+
+  form > div,
+  form label,
+  form input,
+  form button {
+    width: 100%;
+  }
+
+  form input {
+    font-size: 16px;
+  }
+
+  form button {
+    width: 100%;
+    max-width: 220px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .auth-topbar {
+    width: calc(100% - 24px);
+    margin-top: 12px;
+  }
+
+  .home-link {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .travel-form {
+    width: calc(100% - 20px);
+    margin-top: 28px;
+    padding: 20px 16px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .two-column-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .form-field {
+    width: 100%;
+  }
+
+  .form-field input {
+    width: 100%;
+    max-width: none;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header > div:first-child a {
+    font-size: 1.3rem;
+  }
+
+  form {
+    margin-top: 20px;
+    padding: 18px 14px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .header-buttons {
+    gap: 6px;
+  }
+
+  .header-buttons a,
+  .header-buttons button {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+}
