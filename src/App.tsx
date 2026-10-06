@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AgentLogin from "./pages/AgentLogin";
 import AgentPage from "./pages/AgentPage";
+import LandingPage from "./pages/LandingPage";
+import MyEnquiries from "./pages/MyEnquiries";
 
 function App() {
     return (
@@ -13,6 +15,10 @@ function App() {
                 <Route path="/" element={<Home />} />
 
                 <Route path="/login" element={<Login />} />
+
+                <Route path="/landing" element={<LandingPage />} />
+
+                <Route path="/my-enquiries" element={<MyEnquiries />} />
 
                 <Route path="/agent-login" element={<AgentLogin />} />
 

@@ -49,7 +49,7 @@ function Header() {
 
   const handleMyEnquiries = () => {
     setMenuOpen(false);
-    navigate("/");
+    navigate("/my-enquiries");
   };
 
   return (
@@ -109,7 +109,7 @@ function Header() {
             </Link>
 
             <Link to="/signup">
-              <button>Sign Up</button>
+              <button className="join-button">Join for free</button>
             </Link>
           </>
         )}

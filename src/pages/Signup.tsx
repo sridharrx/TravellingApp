@@ -57,7 +57,7 @@ function Signup() {
     <div>
       {isLoading && <Loader text="Creating account..." />}
 
-      <h2>Sign Up</h2>
+      <h2>Join for free</h2>
 
       <form onSubmit={handleSignup}>
         <div>
@@ -102,8 +102,8 @@ function Signup() {
 
         <br />
 
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Creating account..." : "Sign Up"}
+        <button type="submit" className="join-button" disabled={isLoading}>
+          {isLoading ? "Creating account..." : "Join for free"}
         </button>
       </form>
 

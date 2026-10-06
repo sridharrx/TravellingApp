@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_BASE_URL, apiFetch } from "../config/api";
 
-function TravelForm() {
+type TravelFormProps = {
+  initialDestination?: string;
+};
+
+function TravelForm({ initialDestination = "" }: TravelFormProps) {
+  const navigate = useNavigate();
 
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
-  const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState(initialDestination);
   const [fullName, setFullName] = useState(() => localStorage.getItem("userName") || "");
   const [email, setEmail] = useState(() => localStorage.getItem("userEmail") || "");
   const [adults, setAdults] = useState(1);
@@ -17,6 +22,10 @@ function TravelForm() {
     setFullName(localStorage.getItem("userName") || "");
     setEmail(localStorage.getItem("userEmail") || "");
   }, []);
+
+  useEffect(() => {
+    setDestination(initialDestination);
+  }, [initialDestination]);
 
   const handleSubmit = async (e: React.FormEvent) => {
 
@@ -41,6 +50,7 @@ function TravelForm() {
 
     // Get logged-in user's email
     const userEmail = localStorage.getItem("userEmail");
+    const userId = localStorage.getItem("userId");
 
     if (!userEmail) {
         alert("Please login first");
@@ -54,7 +64,8 @@ function TravelForm() {
         toDate,
         destination: trimmedDestination,
         adults,
-        children
+        children,
+        ...(userId ? { userId } : {}),
     };
 
     console.log("Sending data:", travelData);
@@ -80,6 +91,7 @@ function TravelForm() {
             console.log("Saved successfully:", data);
 
             alert("Travel booking submitted successfully!");
+            navigate("/my-enquiries");
 
         } else {
 

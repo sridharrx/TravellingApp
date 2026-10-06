@@ -58,6 +58,13 @@ function Login() {
                     userData?.email ??
                     email;
 
+                const savedUserId =
+                    userData?.user?.id ??
+                    userData?.id ??
+                    userData?.userId ??
+                    userData?.user_id ??
+                    "";
+
                 const fallbackUserName =
                     savedUserEmail?.split("@")[0]?.trim() || "User";
 
@@ -68,10 +75,15 @@ function Login() {
 
                 localStorage.setItem("userName", savedUserName);
                 localStorage.setItem("userEmail", savedUserEmail);
+
+                if (savedUserId) {
+                    localStorage.setItem("userId", String(savedUserId));
+                }
+
                 localStorage.setItem("isLoggedIn", "true");
 
                 setIsLoading(false);
-                navigate("/");
+                navigate("/landing");
 
                 return;
             }
@@ -140,8 +152,22 @@ function Login() {
                 <p>{message}</p>
             )}
 
-            <div className="auth-topbar">
+            <div className="auth-topbar" style={{ display: "flex", gap: "12px", alignItems: "center", justifyContent: "center" }}>
                 <Link to="/" className="home-link">Home</Link>
+                <Link to="/signup" className="join-button" style={{
+                    display: "inline-flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "8px 16px",
+                    textDecoration: "none",
+                    borderRadius: "4px",
+                    fontWeight: 600,
+                    whiteSpace: "nowrap",
+                    width: "120px",
+                    boxSizing: "border-box",
+                }}>
+                    Join for free
+                </Link>
             </div>
 
         </div>

@@ -60,6 +60,17 @@ main {
   text-align: center;
 }
 
+.join-button {
+  background: #d90429 !important;
+  border-color: #d90429 !important;
+  color: #ffffff !important;
+}
+
+.join-button:hover {
+  background: #b00320 !important;
+  border-color: #b00320 !important;
+}
+
 .user-menu {
   position: relative;
 }
