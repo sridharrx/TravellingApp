@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { clearAuthSession } from "../config/api";
 
 function Header() {
   const navigate = useNavigate();
@@ -40,9 +41,7 @@ function Header() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.setItem("isLoggedIn", "false");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userEmail");
+    clearAuthSession();
     setIsLoggedIn(false);
     setMenuOpen(false);
     navigate("/login");

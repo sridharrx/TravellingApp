@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
-import { API_BASE_URL } from "../config/api";
+import { API_BASE_URL, extractJwtToken, setStoredToken } from "../config/api";
 
 function Login() {
 
@@ -45,6 +45,12 @@ function Login() {
                     userData = await response.json();
                 } catch {
                     userData = null;
+                }
+
+                const token = extractJwtToken(response, userData);
+
+                if (token) {
+                    setStoredToken(token);
                 }
 
                 const savedUserEmail =

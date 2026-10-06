@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import AgentEnquiryCard from "../components/AgentEnquiryCard";
-import { API_BASE_URL } from "../config/api";
+import { API_BASE_URL, apiFetch } from "../config/api";
 
 interface Booking {
   destination?: string;
@@ -33,7 +33,7 @@ function AgentPage() {
 
         console.log("Calling API:", API_BASE_URL);
 
-        const response = await fetch(
+        const response = await apiFetch(
           `${API_BASE_URL}/api/travel/all?masked=true`
         );
 

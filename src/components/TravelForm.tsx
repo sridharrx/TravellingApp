@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { API_BASE_URL } from "../config/api";
+import { API_BASE_URL, apiFetch } from "../config/api";
 
 function TravelForm() {
 
@@ -62,7 +62,7 @@ function TravelForm() {
 
     try {
 
-        const response = await fetch(
+        const response = await apiFetch(
             `${API_BASE_URL}/api/travel?email=${encodeURIComponent(userEmail)}`,
             {
                 method: "POST",
