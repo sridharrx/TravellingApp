@@ -6,6 +6,7 @@ import AgentLogin from "./pages/AgentLogin";
 import AgentPage from "./pages/AgentPage";
 import LandingPage from "./pages/LandingPage";
 import MyEnquiries from "./pages/MyEnquiries";
+import AgentSignup from "./pages/AgentSignup";
 
 function App() {
     return (
@@ -19,12 +20,14 @@ function App() {
                 <Route path="/landing" element={<LandingPage />} />
 
                 <Route path="/my-enquiries" element={<MyEnquiries />} />
+                <Route path="/new-enquiry" element={<LandingPage />} />
 
                 <Route path="/agent-login" element={<AgentLogin />} />
 
                 <Route path="/agent" element={<AgentPage />} />
 
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/agent-signup" element={<AgentSignup />} />
 
             </Routes>
         </BrowserRouter>

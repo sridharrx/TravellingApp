@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { API_BASE_URL, apiFetch } from "../config/api";
 
@@ -11,8 +12,8 @@ const chevronStyle = {
 
 interface BookingItem {
   destination: string;
-  fromDate: string;
-  toDate: string;
+  from: string;
+  to: string;
   travelers: number;
 }
 
@@ -24,6 +25,7 @@ interface UserBookingsResponse {
 }
 
 function MyEnquiries() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState<UserBookingsResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -64,7 +66,35 @@ function MyEnquiries() {
       <Header />
 
       <main style={{ maxWidth: "1000px", margin: "0 auto", padding: "32px 20px" }}>
-        <h1 style={{ textAlign: "center", marginBottom: "24px" }}>My Enquiries</h1>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "16px",
+            marginBottom: "24px",
+            flexWrap: "wrap",
+          }}
+        >
+          <h1 style={{ margin: 0 }}>My Enquiries</h1>
+
+          <button
+            type="button"
+            onClick={() => navigate("/landing?view=menu", { replace: true })}
+            style={{
+              background: "#475569",
+              color: "#fff",
+              border: "none",
+              borderRadius: "10px",
+              padding: "12px 20px",
+              fontSize: "0.95rem",
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            Back to options
+          </button>
+        </div>
 
         {loading ? (
           <p style={{ textAlign: "center" }}>Loading enquiries...</p>
@@ -123,7 +153,7 @@ function MyEnquiries() {
 
             {userData.bookings.map((booking, index) => (
               <div
-                key={`${booking.destination}-${booking.fromDate}-${index}`}
+                key={`${booking.destination}-${booking.from}-${index}`}
                 style={{
                   background: "rgba(255,255,255,0.9)",
                   border: "1px solid #dbe3f0",
@@ -133,8 +163,8 @@ function MyEnquiries() {
                 }}
               >
                 <p><strong>Destination:</strong> {booking.destination || "N/A"}</p>
-                <p><strong>From:</strong> {booking.fromDate || "N/A"}</p>
-                <p><strong>To:</strong> {booking.toDate || "N/A"}</p>
+                <p><strong>From:</strong> {booking.from || "N/A"}</p>
+                <p><strong>To:</strong> {booking.to || "N/A"}</p>
                 <p><strong>Travelers:</strong> {booking.travelers ?? 0}</p>
               </div>
             ))}

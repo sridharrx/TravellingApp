@@ -1,4 +1,5 @@
 const DEFAULT_DEPLOYED_API = "https://travellingappbackend.onrender.com";
+const LOCAL_API_IPV4 = "http://127.0.0.1:8080";
 const LOCAL_API = "http://localhost:8080";
 
 export const API_BASE_URL = (() => {
@@ -8,7 +9,20 @@ export const API_BASE_URL = (() => {
     return configuredUrl.replace(/\/+$/, "");
   }
 
-  if (typeof window !== "undefined" && window.location.hostname === "localhost") {
+  // When running the Vite dev server prefer the local backend.
+  // Also treat common local hostnames as local.
+  const isLocalHost = typeof window !== "undefined" && (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1" ||
+    window.location.hostname === "0.0.0.0"
+  );
+
+  if (import.meta.env.DEV) {
+    // prefer IPv4 loopback in dev to avoid servers bound only to 127.0.0.1
+    return LOCAL_API_IPV4;
+  }
+
+  if (isLocalHost) {
     return LOCAL_API;
   }
 
