@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AgentLogin from "./pages/AgentLogin";
-import AgentPage from "./pages/AgentPage";
 import LandingPage from "./pages/LandingPage";
 import MyEnquiries from "./pages/MyEnquiries";
 import AgentSignup from "./pages/AgentSignup";
