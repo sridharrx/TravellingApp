@@ -18,12 +18,14 @@
   .header-buttons {
     width: 100%;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
+    justify-content: center;
   }
 
   .header-buttons a,
   .header-buttons button {
-    width: 100%;
+    width: auto;
+    min-width: 135px;
   }
 
   .header-buttons a {

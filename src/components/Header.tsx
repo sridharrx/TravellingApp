@@ -42,9 +42,16 @@ function Header() {
 
   const handleLogout = () => {
     clearAuthSession();
+    localStorage.removeItem("agentId");
+    localStorage.removeItem("agentName");
+    localStorage.removeItem("agentEmail");
+    localStorage.removeItem("agentPhone");
+    localStorage.removeItem("agentPlaceOfOperation");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userRole");
     setIsLoggedIn(false);
     setMenuOpen(false);
-    navigate("/login");
+    navigate("/agent-login");
   };
 
   const handleMyEnquiries = () => {
@@ -52,17 +59,19 @@ function Header() {
     navigate("/my-enquiries");
   };
 
+  const isAgentPage = location.pathname.startsWith("/agent");
+
   return (
     <header className="header">
       <div>
         <Link to="/">Travel the World</Link>
       </div>
 
-      <div className="header-buttons">
-        {location.pathname === "/agent" ? (
-          <Link to="/">
-            <button>Home</button>
-          </Link>
+      <div className="header-buttons" style={{ display: "flex", gap: "24px", alignItems: "center", flexWrap: "wrap" }}>
+        {location.pathname.startsWith("/agent") ? (
+          <button type="button" onClick={handleLogout}>
+            Logout
+          </button>
         ) : isLoggedIn ? (
           <div className="user-menu" ref={menuRef}>
             <div className="user-menu-trigger">
@@ -80,13 +89,15 @@ function Header() {
 
             {menuOpen && (
               <div className="user-dropdown">
-                <button
-                  type="button"
-                  className="dropdown-item"
-                  onClick={handleMyEnquiries}
-                >
-                  My Enquiries
-                </button>
+                {!isAgentPage && (
+                  <button
+                    type="button"
+                    className="dropdown-item"
+                    onClick={handleMyEnquiries}
+                  >
+                    My Enquiries
+                  </button>
+                )}
 
                 <button
                   type="button"
@@ -101,12 +112,20 @@ function Header() {
         ) : (
           <>
             <Link to="/agent-login">
-              <button>Agent Login</button>
+              <button style={{
+                background: "#2563eb",
+                color: "#fff",
+                border: "none",
+                borderRadius: "8px",
+                padding: "10px 18px",
+                fontWeight: 700,
+                cursor: "pointer"
+              }}>
+                User Login
+              </button>
             </Link>
 
-            <Link to="/login">
-              <button>Login</button>
-            </Link>
+            <Link to="/login"><button style={{ background: "#234543", color: "#fff", border: "none", borderRadius: "8px", padding: "10px 18px", fontWeight: 700, cursor: "pointer", minWidth: "135px" }}>Traveller Login</button></Link>
 
             <Link to="/signup">
               <button className="join-button">Join for free</button>

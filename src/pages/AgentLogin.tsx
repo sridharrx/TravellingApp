@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import Loader from "../components/Loader";
-import { API_BASE_URL, extractJwtToken, setStoredToken } from "../config/api";
+import { API_BASE_URL } from "../config/api";
 
 function AgentLogin() {
 
@@ -15,81 +15,62 @@ function AgentLogin() {
   const params = new URLSearchParams(location.search);
   const signupSuccess = params.get("signup") === "success";
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
 
-    if (isLoading) return;
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    setMessage("");
-    setIsLoading(true);
+  if (isLoading) return;
 
-    try {
-      let url = `${API_BASE_URL}/api/auth/login`;
-      // In dev, prefer IPv4 loopback to avoid servers bound only to 127.0.0.1
-      if (import.meta.env.DEV) {
-        url = url.replace("localhost", "127.0.0.1");
-      }
+  setMessage("");
+  setIsLoading(true);
 
-      console.log("Agent login request ->", url, { email });
+  try {
+    let url = `${API_BASE_URL}/api/auth/agent/login`;
 
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        let userData: Record<string, any> | null = null;
-
-        try {
-          userData = await response.json();
-        } catch {
-          userData = null;
-        }
-
-        const token = extractJwtToken(response, userData);
-        if (token) {
-          setStoredToken(token);
-        }
-
-        const savedUserEmail = userData?.user?.email ?? userData?.email ?? email;
-
-        const fallbackUserName = savedUserEmail?.split("@")[0]?.trim() || "User";
-
-        const savedUserName = userData?.user?.name ?? userData?.name ?? fallbackUserName;
-
-        localStorage.setItem("userName", savedUserName);
-        localStorage.setItem("userEmail", savedUserEmail);
-        localStorage.setItem("isLoggedIn", "true");
-
-        const role = userData?.user?.role ?? userData?.role ?? "";
-
-        setIsLoading(false);
-
-        if (role === "AGENT") {
-          navigate("/agent");
-          return;
-        }
-
-        setMessage("Account is not an agent account");
-        return;
-      }
-
-      // Log response information for debugging when not OK
-      const respText = await response.text();
-      console.log("Agent login failed. status:", response.status);
-      console.log("Response headers:");
-      response.headers.forEach((v, k) => console.log(k, v));
-      console.log("Response body:", respText);
-
-      setMessage(respText || "Invalid email or password");
-    } catch (error) {
-      console.error("Agent login error:", error);
-      setMessage("Unable to connect to server");
-    } finally {
-      setIsLoading(false);
+    if (import.meta.env.DEV) {
+      url = url.replace("localhost", "127.0.0.1");
     }
-  };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.trim(),
+        password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setMessage(data.message || "Invalid email or password");
+      return;
+    }
+
+
+localStorage.setItem("agentId", String(data.id));
+localStorage.setItem("agentName", data.agentName);
+localStorage.setItem("agentEmail", data.email);
+localStorage.setItem("agentPhone", data.phone ?? "");
+localStorage.setItem(
+  "agentPlaceOfOperation",
+  data.placeOfOperation ?? ""
+);
+localStorage.setItem("userRole", "AGENT");
+localStorage.setItem("isLoggedIn", "true");
+
+navigate("/agent");
+
+  } catch (error) {
+    console.error("Agent login error:", error);
+    setMessage("Unable to connect to server");
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div style={{ maxWidth: "420px", margin: "40px auto", padding: "0 16px" }}>
@@ -127,10 +108,26 @@ function AgentLogin() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
             disabled={isLoading}
+            required
           />
         </div>
 
-        <button type="submit" style={{ marginTop: "8px" }} disabled={isLoading}>
+        <button
+          type="submit"
+          style={{
+            marginTop: "8px",
+            background: "#3b82f6",
+            color: "#fff",
+            border: "none",
+            borderRadius: "10px",
+            padding: "12px 18px",
+            fontSize: "1rem",
+            fontWeight: 700,
+            cursor: isLoading ? "not-allowed" : "pointer",
+            opacity: isLoading ? 0.8 : 1,
+          }}
+          disabled={isLoading}
+        >
           {isLoading ? "Checking..." : "Agent Login"}
         </button>
 

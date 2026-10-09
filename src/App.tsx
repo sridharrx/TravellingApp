@@ -7,6 +7,7 @@ import AgentPage from "./pages/AgentPage";
 import LandingPage from "./pages/LandingPage";
 import MyEnquiries from "./pages/MyEnquiries";
 import AgentSignup from "./pages/AgentSignup";
+import AgentDashboard from "./pages/AgentDashboard";
 
 function App() {
     return (
@@ -24,7 +25,7 @@ function App() {
 
                 <Route path="/agent-login" element={<AgentLogin />} />
 
-                <Route path="/agent" element={<AgentPage />} />
+                <Route path="/agent" element={<AgentDashboard />} />
 
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/agent-signup" element={<AgentSignup />} />

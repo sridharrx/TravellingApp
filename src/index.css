@@ -38,19 +38,21 @@ main {
 
 .header-buttons {
   display: flex;
-  gap: 10px;
+  gap: 24px;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .header-buttons a {
   display: inline-flex;
   justify-content: center;
-  width: 120px;
+  min-width: 120px;
 }
 
 .header-buttons button {
   width: 100%;
+  min-width: 135px;
   padding: 10px 16px;
   border: 1px solid #dbe3f0;
   background: transparent;
@@ -58,6 +60,7 @@ main {
   font-weight: 600;
   cursor: pointer;
   text-align: center;
+  white-space: nowrap;
 }
 
 .join-button {

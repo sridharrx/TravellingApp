@@ -9,7 +9,7 @@ function AgentSignup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [operationPlace, setOperationPlace] = useState("");
+  const [placeOfOperation, setPlaceOfOperation] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -22,9 +22,9 @@ function AgentSignup() {
     const signupData = {
       agentName,
       email,
-      password,
       phone,
-      operationPlace,
+      placeOfOperation,
+      password,
     } as Record<string, unknown>;
 
     try {
@@ -46,7 +46,7 @@ function AgentSignup() {
       setEmail("");
       setPassword("");
       setPhone("");
-      setOperationPlace("");
+      setPlaceOfOperation("");
 
       navigate("/agent-login?signup=success");
     } catch (error) {
@@ -69,6 +69,7 @@ function AgentSignup() {
           <br />
           <input
             type="text"
+            name="agentName"
             value={agentName}
             onChange={(e) => setAgentName(e.target.value)}
             required
@@ -83,6 +84,7 @@ function AgentSignup() {
           <br />
           <input
             type="email"
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -97,6 +99,7 @@ function AgentSignup() {
           <br />
           <input
             type="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -111,8 +114,10 @@ function AgentSignup() {
           <br />
           <input
             type="tel"
+            name="phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            required
             disabled={isLoading}
           />
         </div>
@@ -120,12 +125,14 @@ function AgentSignup() {
         <br />
 
         <div>
-          <label>Operation Place</label>
+          <label>Place of Operation</label>
           <br />
           <input
             type="text"
-            value={operationPlace}
-            onChange={(e) => setOperationPlace(e.target.value)}
+            name="placeOfOperation"
+            value={placeOfOperation}
+            onChange={(e) => setPlaceOfOperation(e.target.value)}
+            required
             disabled={isLoading}
           />
         </div>
