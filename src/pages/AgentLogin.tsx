@@ -139,7 +139,22 @@ navigate("/agent");
 
       <div style={{ marginTop: 16, textAlign: "center" }}>
         <span>New agent? </span>
-        <Link to="/agent-signup">Sign up as an agent</Link>
+         <Link
+    to="/agent-signup"
+    style={{
+      display: "inline-block",
+      marginLeft: "6px",
+      padding: "8px 14px",
+      background: "linear-gradient(to bottom, #38bdf8, #0284c7)",
+      color: "#ffffff",
+      textDecoration: "none",
+      fontWeight: 600,
+      borderRadius: "8px",
+      boxShadow: "0 3px 8px rgba(0, 0, 0, 0.2)",
+    }}
+  >
+    Sign up as an agent
+  </Link>
       </div>
 
       <div className="auth-topbar" style={{ marginTop: 12, textAlign: "center" }}>

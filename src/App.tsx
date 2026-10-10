@@ -9,6 +9,7 @@ import MyEnquiries from "./pages/MyEnquiries";
 import AgentSignup from "./pages/AgentSignup";
 import AgentDashboard from "./pages/AgentDashboard";
 import BackgroundSlider from "./components/BackgroundSlider";
+import AgentEnquiries from "./pages/AgentEnquiries";
 
 function App() {
     return (
@@ -25,6 +26,8 @@ function App() {
                 <Route path="/agent" element={<AgentDashboard />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/agent-signup" element={<AgentSignup />} />
+                <Route path="/agent/enquiries" element={<AgentEnquiries />}
+/>
             </Routes>
         </BrowserRouter>
     );
